@@ -1,7 +1,141 @@
 <html>
-	<head>
-	</head>
-	<body>
-		Project 1 here
-	</body>
+
+<head>
+</head>
+
+<body>
+    <h1>Project 1 Write-Up</h1><br>
+    <h2>Task 1 </h2>
+    <h4>Walk Through:</h4>
+    <p>I rasterized triangles using the point in triangle sampling method. The idea is to, for every pixle, check that the center of the pixel is within the traingle. If it is, we fill it with color.</p>
+    <p>I start by setting up a double for loop to check every single pixel. The pixel location being checked is x + 0.5 and y + 0.5 - the center of the pixel. Then, using the point in triangle formula, I do some math to calculate whether the center point
+        is in the pixel. There needs to be a check for both directions of navigating the trangles edges. Then if the values are greater than zero, the pixel is in the triangle and it gets colored. </p>
+
+    <h4>Explain how your algorithm is no worse than one that checks each sample within the bounding box of the triangle.</h4>
+    <p>My algorithm is no worse than one that checks each sample within the bounding box because the bulk of the work happens when the pixel is in the triangle. Since the bounding box will always be larger than the triangle, my algorithm will always compute
+        less pixels that whats in the box.
+    </p>
+
+    <h4>Interesting Part of SVG4</h4>
+    <img src="task 1.png" style="width:500px;height:auto;">
+
+    <br>
+    <div>
+        <h2>Task 2 </h2>
+        <h4>Super Sampling Algorithm</h4>
+        <p>For the super sampling algorithm, I modified my algorithm from task 1 to incorporate it. Similar to task 1, i sampled at every pixel however each pixel needed to be sampled sample rate times at specific locations. So I added a second double for
+            loop to sample sample rate locations per pixel and write directly to sample_buffer. In resolve_to_framebuffer, I averaged out every sample_rate number of values to write to the frame buffer. So every color rendered is the average of sample_rate
+            values. I changed how fill_pixel operates since the sample_buffer size gets changed relative to sample_rate. So fill_pixel now writes sample_rate number of values into sample_buffer for each point or line. Supersampling is useful
+        </p>
+
+
+        <img src="task 2.1.png" style="width:500px;height:auto;">
+        <img src="task 2.2.png" style="width:500px;height:auto;">
+        <img src="task 2.3.png" style="width:500px;height:auto;">
+        <img src="task 2.4.png" style="width:500px;height:auto;">
+    </div>
+    <br>
+
+    <div>
+        <h2>Task 3</h2>
+        <p> For my cubeman, I tried to do something funny and make it look like cubeman is running with his arms up. The steps I took to make cubeman look funnier was to include rotations. Specifically, I added rotations to the specific upper leg parts on
+            both right and left legs. THen I added rotation transforms on the lower legs. Once rotated, I edited the translation transforms already in place for the body parts to line up.
+        </p>
+        <p> For the arms, I did a similar thing. Instead, I added rotations equivalently starting at the shoulder so the entire arm would be affected. After rotating, I edited the translations so that the arms attached at a correct looking location on the
+            cube man. Hence this crazy looking run.
+        </p>
+        <p>As a final touch, I decided to modify some colors to give it some swag.</p>
+
+        <img src="Running Man.png" style="width:500px;height:auto;">
+
+    </div>
+
+
+
+    <div>
+        <h2>Task 4</h2>
+        <h3>Image aid!</h3>
+        <img src="BaryCentric Corrd demo.png" style="width:500px;height:auto;">
+
+        <p> BaryCentric Coordinates can be thought as the the center point of a triangle weighted relative the distance from each Vertex. Take the triangle for example, with vertices colored Red, Green, and Blue. You can see that the colors blend and transition
+            throughout the triangle. There are no borders and the colors are smooth. This is becuase every pixel in the triangle is calculated via it's relative distance to the vertices and the colors corresponding are weighted repsectively. In other
+            words, we can represent eaxh pixel in the triangle as the weighted sum of how far each pixel is relative to each vertex.
+        </p>
+
+
+        <img src="task 4.png" style="width:500px;height:auto;">
+    </div>
+    <br>
+    <div>
+        <div>
+            <h2>Task 5</h2>
+
+            <p>Pixel Sampling is the strategy used to convert real-time continuous data into something discrete - in the world of graphics, that's sampling continuous data logged as discrete data that can be rendered by pixels. So we are sampling the world
+                to determine what color/data eaxh pixel can render.
+            </p>
+            <p>In Task 5, 2 methods were implemented: Sample Nearest and Sample Bilinear. Sample Nearest returned the colors of the nearest texel in the texture mapping whereas Bilinear Samplng used interpolation to compute the texel to index at. Both methods
+                required texture mapping coordinates (u,v) which were computed same as in task 3 with Barycentric coordinates.
+            </p>
+            <div style="text-align:center;">
+                <h3> Bilinear Sample Rate 1 vs 16</h3>
+
+                <img src="task 5 Bilinear sr_1.png" style="width:500px;height:auto; margin-right: 20px;">
+                <img src="task 5 Bilinear sr_16.png" style="width:500px;height:auto;margin-left: 20px;">
+            </div>
+
+            <div style="text-align:center;">
+                <h3>Nearest Pixel Sample Rate 1 vs 16</h3>
+                <img src="task 5 nearest pix sr_1.png" style="width:500px;height:auto;">
+                <img src="task 5 nearest pix sr_16.png" style="width:500px;height:auto;">
+            </div>
+
+            <h3>Differences Analysis</h3>
+            <p>Overall, it's visually obvious that supersampling improves the image output from both pixel techniques. Overall, Bilinear sampling can be described to have a blurrier out come while nearest Pixel sampling can produces very pixelated images
+                with jaggies. In my case, an incomplete line because of how pixelated the image turned out. In this case, the differences are very noticeable without the pixel inspector. But I think in instances of smaller images, situations where the
+                pixels are more obvious, you can see a visual differnece. From a computation standpoint, Bilinear Interpolation requires more math per pixel so it could be computationally heavier to use Bilinear sampling if the image were really big.
+                And a larger image means more pixels so using nearest sampling wouldn't be the worst because it would be more difficult to see the jaggies since most ppl won't be looking at the image up close or able to see the detail.
+            </p>
+        </div>
+
+        <br>
+        <div>
+            <h2>Task 6</h2>
+            <h3>Level Sampling and My Implementation</h3>
+            <p> Level Sampling is generating an image from sampling to render at a level. The higher the level, the more fuxxy/less detailed the image is. The application of this is to emphaize depth of field and mimic how the human eye percieves the world
+                - specifically farther objects are less detailed while closer objects are more detailed. Having certain amounts of detail puts logic into our image so that it can "make sense." </p>
+
+            <p>I implemented texture mapping through barycentric coordinates where u,v (texture mapping coordinates) are determined according to the barycentric coordinate weights from the sample buffer vertices. So I calculated alpha, beta, and gamme and
+                calculated a weighted avg of (u0, v0), (u1, v1), and (u2, v2) to find (u,v). Given some psm and lsm, the sample helper function would accordingly sample by nearest pixel or bilinearly. Within sample_nearest and sample_bilinearly, the calculated
+                level was used to index into the mipmap to find the correct mipmap texture - if the level were too high, I clamped it so that it would index mipmap[size - 1]. Additionally, I calculated barycentric coordinates for (x + 1), y and x, (y
+                + 1) becuase those were used to calculated the levels of each triangle.
+            </p>
+
+            <h3>TradeOffs</h3>
+            <p>Overall, Each sampling method had their strengths and weaknesses. Nearest neighbor sampling would be the least computational and require less memory usage because it finds the closest texel to utilize. However, Level sampling and supersamplng
+                produve more accurate images though it'll take longer and require more memory. Supersampling requires the most most memory and will be the most computationally heavy since it is averaging out each color to the same degree whereas Level
+                sampling only cares about specific pixels since some will be less detailed. The less detailed pixels would require less computation and memory since including the excess information in the image could produce an image less desirable image.
+                So level sampling saves more space than super sampling but still requires more than nearest neighbor sampling. It ranks the same in computation speeds since memory corresponds with the amount of data being computed. </p>
+            <p></p>
+            <div>
+                <h3 style="text-align:center; margin: 30px;"> Level Zero Mip Map with Nearest Neighbor vs Bilinear Sampling</h3>
+
+                <img src="task 6 Lzero PNearest.png" style="width:500px;height:auto;">
+                <img src="Task 6 LZero PLinear.png" style="width:500px;height:auto;">
+
+            </div>
+
+            <div>
+                <h3 style="text-align:center;margin:30px;"> Leveled Mip Map with Nearest Neighbor vs Bilinear Sampling</h3>
+                <img src="Task 6 LNearest PNearest.png" style="width:500px;height:auto;">
+                <img src="Task 6 LNearest PLinear.png" style="width:500px;height:auto;">
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</body>
+
 </html>
