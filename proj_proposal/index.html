@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <style>
+        body {
+            padding: 100px;
+            width: 1000px;
+            margin: auto;
+            text-align: left;
+            font-weight: 300;
+            font-family: 'Open Sans', sans-serif;
+            color: #121212;
+        }
+        
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+    </style>
+    <title>CS 184 Final Project Proposal</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro" rel="stylesheet">
+</head>
+
+<body>
+    <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2022</h1>
+    <h1 align="middle">Final Project Proposal</h1>
+    <h2 align="middle">Alina Wang, David Wei, Anvi Jain, David Lin</h2>
+
+    <h3 align="middle"> Disclaimer Regarding Terminology</h3>
+    <p>We use “black hole” to refer to any large enough mass which can visibly bend light. So this can simply include objects that have large gravitational masses.
+    </p>
+
+    <h3 align="middle">Summary</h3>
+    <p>We want to implement ray tracing with the addition of black hole physics. This will challenge us to treat rays differently than the straight line approximations of past projects, as black holes/large mass objects are widely known to bend light due
+        to the effects of gravitational lensing. We wish to simulate light around a blackhole, and extend our implementation to see what happens when we put a black hole inside a Cornell Box.
+    </p>
+
+    <h3 align="middle"> Project Description</h3>
+    <p>We were inspired to pursue this idea after seeing the black hole examples of past semesters’ final submissions. There are many resources and existing implementations, which will aid us in creating a bare-bone simulation of light around a black hole.
+        We want to extend our implementation, however, as we think it would be interesting to put a black hole inside a Cornell Box and observe how it affects our final rendered image. We anticipate a few challenges along the way. Being able to simulate
+        the light around a black hole will be challenging as it requires us to research the physical properties of light and how large masses can influence them. Assuming that we tackle this step efficiently, modeling such a mass inside a Cornell Box
+        will require us to alter the implementation of past projects. We have not come up with a solution for placing a black hole inside a Cornell Box at the time of writing.
+
+    </p>
+    <br>
+
+    <h3 align="middle">Goals and Deliverables</h3>
+    <h4>What we plan to deliver </h4>
+    <p>We hope to simulate the effect of a gravitational pull on light. The minimum project that we will deliver is going to be modeling this effect around a black hole in empty space. Since it will be relatively obvious once we achieve a successful solution,
+        we believe our benchmark for success is simply “does it look correct.”
+
+    </p>
+    <h4>What we hope to deliver </h4>
+    <p>What we aspire to do if everything goes well is to showcase an image like CBunny.dae used in project 3-1, and then have the option to place blackholes/large gravitational masses anywhere within the cornell box and adjust the gravitational strength
+        and then render the resulting images. We believe that rendering for such a project will take extremely long. While we don’t have many concrete metrics yet, what we think are good signs of a proper rendering are: within the Schwarzfeld radius of
+        the black hole, it will be all black; light curves around the edge of the black hole, images extremely far from the gravitational mass are not altered that significantly.
+    </p>
+    <br>
+
+    <h3 align="Schedule">Schedule</h3>
+    <p>We will be working on this project regularly to keep up with our tasks. We will start with implementing the black hole itself and then, upon success, putting it inside a Cornell box. This project is going to require us to first learn about the physics
+        of black holes so that we have a better sense on how to implement it. We will first build a correct rendering of a black hole. Then, we need to modify a dae file to hold a black hole. And render the image to see how a light and Cornell box responds
+        to a black hole. </p>
+
+    <p>Week 0 - 2: Build black hole simulation</p>
+    <p>Week 2 - 3: Place black hole in Cornell Box</p>
+    <p>Week 3 - 4: Buffer</p>
+
+    <br>
+
+    <h3 align="middle">Resources</h3>
+    <a href="https://celticspwn.github.io/CS184FinalProject/final.html">https://celticspwn.github.io/CS184FinalProject/final.html</a>
+    <br>
+    <a href="https://rantonels.github.io/starless/">https://rantonels.github.io/starless/</a>
+    <br>
+    <a href="http://spiff.rit.edu/classes/phys240/lectures/grav_lens/grav_lens.html"> http://spiff.rit.edu/classes/phys240/lectures/grav_lens/grav_lens.html</a>
+    <br>
+    <a href="https://iopscience.iop.org/article/10.1088/0264-9381/32/6/065001">https://iopscience.iop.org/article/10.1088/0264-9381/32/6/065001</a>
+    <br>
+    <a href="https://galaxiesbook.org/chapters/III-04.-Gravitational-Lensing.html">https://galaxiesbook.org/chapters/III-04.-Gravitational-Lensing.html</a>
+</body>
+
+</html>
